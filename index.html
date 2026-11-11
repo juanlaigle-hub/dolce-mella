@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Chips de manzana deshidratada de Villa Regina, Alto Valle de Río Negro. Un producto de Frutas Stelzer.">
+<title>Dolce Mella</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>html{color-scheme:light}body{margin:0}[hidden]{display:none!important}</style>
+<style>
+/* Layout: cielo del Alto Valle arriba, bardas abajo; la página se navega por solapas
+   como una app, con tarjetas grandes y redondeadas, colores del envase. */
+:root {
+  --sky: #DDF1FB;
+  --sky-2: #A9DCF5;
+  --paper: #FFFFFF;
+  --ink: #12261C;
+  --ink-soft: #4A5D53;
+  --red: #E0262F;
+  --red-deep: #B01822;
+  --green: #0F5132;
+  --sun: #FFC93C;
+  --barda: #F08A3C;
+  --violet: #6B5CA5;
+  --line: #D7E6EE;
+  --chip: #F1F7FA;
+  --draft: #8A5A00;
+  --draft-bg: #FFF1C7;
+  --on-dark: #FFFFFF;
+  --band: #4A3F86;
+  --f-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --wrap: 1160px;
+  --r-lg: 28px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --sky: #0E2230; --sky-2: #163A50; --paper: #0B1A24; --ink: #EAF4F8; --ink-soft: #A8BCC6;
+    --red: #FF4F57; --red-deep: #FF6B72; --green: #7FD3A2; --line: #22394A; --chip: #132A38;
+    --draft: #F5C451; --draft-bg: #3A2F12; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --sky: #0E2230; --sky-2: #163A50; --paper: #0B1A24; --ink: #EAF4F8; --ink-soft: #A8BCC6;
+  --red: #FF4F57; --red-deep: #FF6B72; --green: #7FD3A2; --line: #22394A; --chip: #132A38;
+  --draft: #F5C451; --draft-bg: #3A2F12; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 1.06rem; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--paper); }
+h1, h2, h3 { font-family: var(--f-display); margin: 0; line-height: 1.02; letter-spacing: -.025em; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 8px; }
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: var(--wrap); margin: 0 auto; }
+.kicker { font-weight: 700; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+.fill { background: var(--draft-bg); color: var(--draft); padding: 0 .3em; border-radius: 4px; font-style: normal; }
+.draft-flag { display: inline-flex; align-items: center; gap: .5em; font-size: .78rem; font-weight: 700; color: var(--draft); background: var(--draft-bg); padding: .4em .8em; border-radius: 999px; }
+.btn { display: inline-flex; align-items: center; gap: .5em; font-family: var(--f-display); font-weight: 700; font-size: 1rem; padding: .85em 1.4em; border-radius: 999px; text-decoration: none; border: 0; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn.red { background: var(--red); color: #fff; box-shadow: 0 6px 0 var(--red-deep); }
+.btn.red:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--red-deep); }
+.btn.ghost { background: var(--chip); color: var(--ink); }
+
+/* ---------- Header + solapas ---------- */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none; }
+.brand b { font-family: var(--f-display); font-weight: 800; font-size: 1.35rem; letter-spacing: -.03em; color: var(--green); }
+.brand b span { color: var(--red); }
+.brand small { display: block; font-size: .7rem; color: var(--ink-soft); font-weight: 600; letter-spacing: .04em; }
+.tabs { display: flex; gap: 6px; background: var(--chip); padding: 5px; border-radius: 999px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: none; font-family: var(--f-display); font-weight: 700; font-size: .95rem; padding: .55em 1.05em; border-radius: 999px; text-decoration: none; color: var(--ink-soft); white-space: nowrap; }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { background: var(--paper); color: var(--red); box-shadow: 0 2px 8px rgb(0 0 0 / .08); }
+@media (max-width: 820px) {
+  .top .wrap { flex-direction: column; align-items: stretch; gap: 10px; padding-block: 10px; }
+  .tabs { border-radius: 16px; }
+}
+
+/* ---------- Paneles ---------- */
+.panel { animation: rise .35s ease both; }
+@keyframes rise { from { opacity: .4; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .panel { animation: none; } }
+.sec { padding-block: 64px; }
+.sec-head { display: grid; gap: 12px; max-width: 44rem; margin-bottom: 36px; }
+.sec-head h2 { font-size: clamp(2rem, 4.6vw, 3.2rem); font-weight: 800; }
+.sec-head p { color: var(--ink-soft); font-size: 1.12rem; }
+
+/* ---------- Inicio ---------- */
+.hero { background: linear-gradient(180deg, var(--sky) 0%, var(--sky-2) 100%); position: relative; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 40px; align-items: center; padding-block: 56px 150px; position: relative; z-index: 2; }
+.hero h1 { font-size: clamp(2.8rem, 7.4vw, 5.6rem); font-weight: 800; color: var(--green); }
+.hero h1 .r { color: var(--red); }
+.hero .lede { margin-top: 20px; font-size: 1.22rem; max-width: 32em; color: var(--ink); }
+.hero .cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; list-style: none; padding: 0; }
+.badges li { background: var(--paper); color: var(--green); font-weight: 700; font-size: .85rem; padding: .45em .9em; border-radius: 999px; box-shadow: 0 2px 0 rgb(0 0 0 / .06); }
+.hero-photo { position: relative; justify-self: center; width: min(460px, 100%); }
+.hero-photo img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%; border: 8px solid var(--paper); box-shadow: 0 24px 50px rgb(16 60 90 / .25); }
+.sticker { position: absolute; display: grid; place-items: center; text-align: center; font-family: var(--f-display); font-weight: 800; line-height: 1; border-radius: 50%; }
+.sticker.sun { width: 120px; height: 120px; background: var(--sun); color: var(--green); top: -10px; right: -6px; transform: rotate(10deg); font-size: 1.05rem; box-shadow: 0 6px 0 #E0A818; }
+.sticker.sun b { display: block; font-size: 2rem; }
+.sticker.red { width: 104px; height: 104px; background: var(--red); color: #fff; bottom: 10px; left: -14px; transform: rotate(-8deg); font-size: .95rem; box-shadow: 0 6px 0 var(--red-deep); }
+.bardas { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 170px; z-index: 1; }
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; padding-block: 40px 130px; }
+  .hero-photo { width: min(340px, 86%); }
+  .sticker.sun { width: 96px; height: 96px; font-size: .9rem; } .sticker.sun b { font-size: 1.6rem; }
+  .sticker.red { width: 86px; height: 86px; font-size: .8rem; }
+}
+.facts { background: var(--band); color: var(--on-dark); }
+.facts .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-block: 28px; }
+.facts div { display: grid; gap: 2px; }
+.facts b { font-family: var(--f-display); font-size: 2.2rem; font-weight: 800; line-height: 1; color: var(--sun); font-variant-numeric: tabular-nums; }
+.facts span { font-size: .92rem; opacity: .9; }
+@media (max-width: 700px) { .facts .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.teasers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 860px) { .teasers { grid-template-columns: 1fr; } }
+.teaser { text-decoration: none; border-radius: var(--r-lg); padding: 26px; display: grid; gap: 10px; align-content: start; min-height: 200px; transition: transform .15s ease; }
+.teaser:hover { transform: translateY(-4px); }
+.teaser h3 { font-size: 1.6rem; font-weight: 800; }
+.teaser p { font-size: 1rem; }
+.teaser .go { font-family: var(--f-display); font-weight: 700; margin-top: auto; }
+.teaser.t1 { background: var(--red); color: #fff; }
+.teaser.t2 { background: var(--sun); color: #3B2A00; }
+.teaser.t3 { background: var(--violet); color: #fff; }
+
+/* ---------- Productos ---------- */
+.prod-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 22px; }
+@media (max-width: 860px) { .prod-grid { grid-template-columns: 1fr; } }
+.prod { border-radius: var(--r-lg); overflow: hidden; display: grid; background: var(--chip); }
+.prod .ph { position: relative; }
+.prod .ph img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.prod .ph .tag { position: absolute; top: 16px; left: 16px; background: var(--red); color: #fff; font-family: var(--f-display); font-weight: 800; padding: .35em .85em; border-radius: 999px; font-size: .9rem; }
+.prod .body { padding: 26px; display: grid; gap: 14px; }
+.prod h3 { font-size: 2rem; font-weight: 800; }
+.prod p { color: var(--ink-soft); }
+.spec { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+.spec div { background: var(--paper); border-radius: 16px; padding: 12px 14px; display: grid; }
+.spec span { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); }
+.spec b { font-family: var(--f-display); font-size: 1.15rem; }
+.prod.pear .ph .tag { background: var(--violet); }
+.moments { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
+.moments span { font-family: var(--f-display); font-weight: 700; font-size: 1.1rem; padding: .55em 1.1em; border-radius: 999px; border: 2px solid var(--ink); }
+.moments span:nth-child(2n) { background: var(--sun); border-color: var(--sun); color: #3B2A00; }
+
+.flavors { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 980px) { .flavors { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .flavors { grid-template-columns: 1fr; } }
+.flavor { position: relative; border-radius: 24px; padding: 22px; min-height: 250px; display: grid; gap: 8px; align-content: end; overflow: hidden; color: #fff; isolation: isolate; }
+.flavor h3 { font-size: 1.6rem; font-weight: 800; }
+.flavor p { font-size: .98rem; }
+.flavor .state { position: absolute; top: 16px; left: 16px; background: rgb(255 255 255 / .22); color: inherit; font-weight: 700; font-size: .78rem; padding: .35em .8em; border-radius: 999px; }
+.flavor .state.on { background: #fff; color: #B01822; }
+.flavor img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.f-clasica { background: #E0262F; }
+.f-romero { background: #2F7A3B; }
+.f-romero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(20 60 30 / .25) 0%, rgb(20 60 30 / .88) 70%); }
+.f-picante { background: #F08A3C; color: #3B1500; }
+.f-picante .state { background: rgb(59 21 0 / .14); }
+.f-especias { background: #6B5CA5; }
+.f-especias .fill { background: rgb(255 255 255 / .2); color: #fff; }
+
+/* ---------- Historia ---------- */
+.story { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: start; }
+@media (max-width: 860px) { .story { grid-template-columns: 1fr; } }
+.story-photo { position: sticky; top: 120px; }
+@media (max-width: 860px) { .story-photo { position: static; max-width: 420px; } }
+.story-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; border-radius: var(--r-lg); }
+.story-photo figcaption { margin-top: 12px; font-size: .92rem; color: var(--ink-soft); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.timeline li { background: var(--chip); border-radius: 22px; padding: 22px 24px; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 16px; }
+.timeline .yr { font-family: var(--f-display); font-weight: 800; color: var(--red); font-size: 1.1rem; }
+.timeline h3 { font-size: 1.3rem; font-weight: 700; }
+.timeline p { margin-top: 6px; color: var(--ink-soft); }
+.timeline li.now { background: var(--green); color: var(--on-dark); }
+.timeline li.now p { color: color-mix(in srgb, var(--on-dark) 85%, transparent); }
+.timeline li.now .yr { color: var(--sun); }
+
+/* ---------- Mosaico ---------- */
+.mosaic { display: grid; grid-template-columns: 1.1fr 1fr 1fr; grid-template-rows: 240px 240px; gap: 14px; }
+.mosaic figure { margin: 0; position: relative; border-radius: 24px; overflow: hidden; min-width: 0; }
+.mosaic img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.mosaic figure:hover img { transform: scale(1.04); }
+.mosaic figcaption { position: absolute; left: 12px; bottom: 12px; background: var(--paper); color: var(--ink); font-family: var(--f-display); font-weight: 700; font-size: .9rem; padding: .35em .8em; border-radius: 999px; }
+.mosaic .m1 { grid-row: 1 / 3; }
+.mosaic .m4 { grid-column: 2 / 4; }
+@media (max-width: 700px) { .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 160px 160px; } .mosaic .m1 { grid-row: 1 / 2; } .mosaic .m4 { grid-column: 1 / 3; } }
+@media (prefers-reduced-motion: reduce) { .mosaic img { transition: none; } }
+.psteps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; counter-reset: s; }
+@media (max-width: 860px) { .psteps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .psteps { grid-template-columns: 1fr; } }
+.psteps li { counter-increment: s; background: var(--chip); border-radius: 24px; overflow: hidden; position: relative; display: grid; align-content: start; }
+.psteps li::before { content: counter(s); position: absolute; top: 12px; left: 12px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--sun); color: #3B2A00; font-family: var(--f-display); font-weight: 800; font-size: 1.15rem; z-index: 1; }
+.psteps img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.psteps div { padding: 18px 20px 22px; display: grid; gap: 6px; }
+.psteps h3 { font-size: 1.3rem; font-weight: 800; }
+.psteps p { color: var(--ink-soft); }
+
+/* ---------- Proceso ---------- */
+.process { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+@media (max-width: 860px) { .process { grid-template-columns: 1fr; } }
+.process img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r-lg); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 14px; align-items: start; }
+.steps li::before { content: counter(s); width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--sun); color: #3B2A00; font-family: var(--f-display); font-weight: 800; font-size: 1.3rem; }
+.steps h3 { font-size: 1.25rem; font-weight: 700; padding-top: 4px; }
+.steps p { color: var(--ink-soft); }
+
+/* ---------- Experiencias ---------- */
+.xp-top { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 28px; align-items: stretch; }
+@media (max-width: 900px) { .xp-top { grid-template-columns: 1fr; } }
+.map-card { background: linear-gradient(180deg, var(--sky), var(--sky-2)); border-radius: var(--r-lg); padding: 20px; display: grid; grid-template-columns: minmax(0, 1fr) 180px; gap: 12px; align-items: center; }
+@media (max-width: 520px) { .map-card { grid-template-columns: 1fr; } }
+.map-card svg { width: 100%; height: auto; max-height: 620px; }
+.prov { fill: var(--paper); stroke: var(--sky-2); stroke-width: .8; cursor: pointer; transition: fill .15s ease; }
+.prov.has { fill: color-mix(in srgb, var(--red) 28%, var(--paper)); }
+.prov.has2 { fill: color-mix(in srgb, var(--red) 55%, var(--paper)); }
+.prov:hover, .prov.sel { fill: var(--red); }
+.pin { fill: var(--red-deep); stroke: var(--paper); stroke-width: 1.5; pointer-events: none; }
+.pin-pulse { fill: none; stroke: var(--red); stroke-width: 2; pointer-events: none; animation: pulse 2.4s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes pulse { 0% { opacity: .9; transform: scale(.6); } 100% { opacity: 0; transform: scale(2.4); } }
+@media (prefers-reduced-motion: reduce) { .pin-pulse { animation: none; opacity: 0; } }
+.origin { fill: var(--green); stroke: var(--paper); stroke-width: 2; }
+.map-side { display: grid; gap: 14px; align-content: center; }
+.big { display: grid; }
+.big b { font-family: var(--f-display); font-weight: 800; font-size: 3rem; line-height: 1; color: var(--green); font-variant-numeric: tabular-nums; }
+.big span { font-size: .9rem; color: var(--ink); font-weight: 600; }
+.legend { display: grid; gap: 6px; font-size: .82rem; font-weight: 600; }
+.legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 6px; }
+.map-hint { font-size: .82rem; color: var(--ink-soft); }
+@media (max-width: 520px) { .map-side { grid-template-columns: repeat(3, minmax(0, 1fr)); } .big b { font-size: 2.2rem; } .legend, .map-hint { grid-column: 1 / -1; } }
+
+.share { background: var(--chip); border-radius: var(--r-lg); padding: 26px; display: grid; gap: 14px; align-content: start; }
+.share h3 { font-size: 1.6rem; font-weight: 800; }
+.share .hint { color: var(--ink-soft); font-size: .98rem; }
+.row2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+@media (max-width: 460px) { .row2 { grid-template-columns: 1fr; } }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label, .field legend { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); }
+.field input, .field select, .field textarea { font: inherit; font-size: 1rem; padding: .7em .85em; border-radius: 14px; border: 2px solid var(--line); background: var(--paper); color: var(--ink); width: 100%; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--red); outline: none; }
+.field textarea { min-height: 96px; resize: vertical; }
+fieldset.field { border: 0; padding: 0; margin: 0; }
+.seg { display: flex; gap: 8px; flex-wrap: wrap; }
+.seg label { position: relative; cursor: pointer; }
+.seg input { position: absolute; opacity: 0; inset: 0; }
+.seg span { display: inline-block; font-family: var(--f-display); font-weight: 700; padding: .45em 1em; border-radius: 999px; background: var(--paper); border: 2px solid var(--line); }
+.seg input:checked + span { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.seg input:focus-visible + span { outline: 3px solid var(--red); outline-offset: 2px; }
+.rate { position: relative; display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 2px; }
+.rate input { position: absolute; opacity: 0; }
+.rate label { font-size: 1.8rem; color: var(--line); cursor: pointer; line-height: 1; }
+.rate input:checked ~ label, .rate label:hover, .rate label:hover ~ label { color: var(--sun); }
+.rate input:focus-visible + label { outline: 3px solid var(--red); outline-offset: 2px; }
+.err { color: var(--red); font-weight: 600; font-size: .95rem; }
+.ok { background: var(--green); color: var(--on-dark); padding: .6em .9em; border-radius: 12px; font-weight: 600; font-size: .95rem; }
+.proto { font-size: .82rem; color: var(--ink-soft); }
+
+.wall-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin: 40px 0 16px; }
+.wall-head h3 { font-size: 1.6rem; font-weight: 800; }
+.filter-now { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.filter-now button { font: inherit; font-weight: 700; font-size: .85rem; background: var(--chip); border: 0; color: var(--ink); padding: .4em .9em; border-radius: 999px; cursor: pointer; }
+.wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 980px) { .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .wall { grid-template-columns: 1fr; } }
+.note { background: var(--paper); border: 2px solid var(--line); border-radius: 22px; padding: 20px; display: grid; gap: 12px; align-content: start; }
+.note.new { border-color: var(--red); }
+.note .meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.note .p { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; padding: .3em .7em; border-radius: 999px; }
+.note .p.manzana { background: color-mix(in srgb, var(--red) 14%, var(--paper)); color: var(--red); }
+.note .p.pera { background: color-mix(in srgb, var(--sun) 40%, var(--paper)); color: var(--ink); }
+.stars { color: var(--sun); letter-spacing: 1px; }
+.note blockquote { margin: 0; font-size: 1.04rem; }
+.who { display: flex; align-items: center; gap: 10px; }
+.av { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 800; color: #fff; }
+.who div { display: grid; line-height: 1.25; min-width: 0; }
+.who b { font-weight: 700; overflow-wrap: anywhere; }
+.who span { font-size: .85rem; color: var(--ink-soft); }
+.empty { grid-column: 1 / -1; background: var(--chip); border-radius: 22px; padding: 28px; text-align: center; color: var(--ink-soft); }
+
+/* ---------- Footer ---------- */
+.foot { background: var(--band); color: var(--on-dark); margin-top: 24px; }
+.foot .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 28px; padding-block: 44px; }
+@media (max-width: 760px) { .foot .wrap { grid-template-columns: 1fr; } }
+.foot h2 { font-size: 2rem; font-weight: 800; color: var(--on-dark); }
+.foot p, .foot li { font-size: .98rem; color: color-mix(in srgb, var(--on-dark) 82%, transparent); }
+.foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.foot .kicker { color: var(--sun); margin-bottom: 8px; }
+.foot .fill { background: color-mix(in srgb, var(--sun) 25%, transparent); color: var(--sun); }
+.legal { font-size: .8rem; opacity: .75; padding-block: 0 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+</style>
+</head>
+<body>
+<header class="top gut">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Inicio">
+      <svg width="34" height="36" viewBox="0 0 30 32" aria-hidden="true"><path d="M15 9c-3-2.2-9-2.4-11.6 2.4C.6 16.6 3 25 7.4 29c2.2 2 4.4 2 5.6 1.2.9-.6 3.1-.6 4 0 1.2.8 3.4.8 5.6-1.2C27 25 29.4 16.6 26.6 11.4 24 6.6 18 6.8 15 9z" fill="#E0262F"/><path d="M15 9c0-3 .6-5.4 2-7" stroke="#5A3416" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M16.6 4.6c2.6-2.8 6.4-2.6 8-1.4-1.4 2.6-4.8 3.8-8 1.4z" fill="#2F7A3B"/></svg>
+      <span><b data-brand-logo>Dolce <span>Mella</span></b><small>Un producto de Frutas Stelzer</small></span>
+    </a>
+    <nav class="tabs" role="tablist" aria-label="Secciones">
+      <a class="tab" role="tab" href="#inicio" data-tab="inicio">Inicio</a>
+      <a class="tab" role="tab" href="#productos" data-tab="productos">Productos</a>
+      <a class="tab" role="tab" href="#historia" data-tab="historia">Nuestra historia</a>
+      <a class="tab" role="tab" href="#proceso" data-tab="proceso">Cómo se hace</a>
+      <a class="tab" role="tab" href="#experiencias" data-tab="experiencias">Experiencias</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ================= INICIO ================= -->
+  <section class="panel" id="p-inicio" role="tabpanel" data-panel="inicio">
+    <div class="hero gut">
+      <div class="wrap">
+        <div>
+          <p class="kicker">Villa Regina · Alto Valle de Río Negro</p>
+          <h1 style="margin-top:14px">Chips de manzana <span class="r">de verdad.</span></h1>
+          <p class="lede">Manzanas rojas de nuestras chacras, cortadas en rodajas y deshidratadas. Crocantes, sin azúcar agregada y con un solo ingrediente: manzana.</p>
+          <div class="cta">
+            <a class="btn red" href="#experiencias">Contá dónde la probaste</a>
+            <a class="btn ghost" href="#historia">Conocé a la familia</a>
+          </div>
+          <ul class="badges"><li>100% natural</li><li>Sin azúcar agregada</li><li>Sin TACC</li><li>Industria Argentina</li></ul>
+        </div>
+        <div class="hero-photo">
+          <img src="img-huerto.jpg" width="900" height="1600" alt="Una manzana roja recién cosechada en la mano, con las hileras de la chacra detrás." style="object-position:50% 70%">
+          <span class="sticker sun"><span><b>1</b>ingrediente</span></span>
+          <span class="sticker red">Hecho en<br>el Valle</span>
+        </div>
+      </div>
+      <svg class="bardas" viewBox="0 0 1440 170" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 70 L120 40 L210 58 L330 22 L470 60 L560 44 L700 76 L820 30 L960 62 L1080 36 L1220 66 L1340 40 L1440 56 V170 H0 Z" fill="#F08A3C"/>
+        <path d="M0 104 L160 74 L300 96 L440 70 L600 100 L760 78 L920 104 L1080 80 L1240 100 L1440 84 V170 H0 Z" fill="#6B5CA5"/>
+        <path d="M0 132 C240 112 420 150 720 128 C1000 108 1200 148 1440 126 V170 H0 Z" fill="#2F7A3B"/>
+        <path d="M0 152 C300 138 520 166 800 150 C1060 136 1260 160 1440 148 V170 H0 Z" fill="var(--paper)"/>
+      </svg>
+    </div>
+    <div class="facts gut">
+      <div class="wrap">
+        <div><b>35 g</b><span>por bolsa</span></div>
+        <div><b>1</b><span>ingrediente: manzanas</span></div>
+        <div><b>0</b><span>azúcar agregada</span></div>
+        <div><b id="f-prov">24</b><span>provincias ya la probaron</span></div>
+      </div>
+    </div>
+    <div class="sec gut">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="kicker">Del árbol a la bolsa</p>
+          <h2>Fruta real, hecha snack.</h2>
+        </div>
+        <div class="mosaic">
+          <figure class="m1"><img src="img-chips-bandeja.jpg" width="900" height="1600" alt="Chips de manzana deshidratados sobre una bandeja." loading="lazy"><figcaption>Chips crocantes</figcaption></figure>
+          <figure class="m2"><img src="img-lavado.jpg" width="900" height="1158" alt="Manzanas rojas recién lavadas, con gotas de agua." loading="lazy"><figcaption>Recién lavadas</figcaption></figure>
+          <figure class="m3"><img src="img-cubitos.jpg" width="900" height="1035" alt="Cubitos de manzana deshidratada." loading="lazy"><figcaption>Manzana deshidratada</figcaption></figure>
+          <figure class="m4"><img src="img-chip.jpg" width="1200" height="675" alt="Rodajas de manzana secas sobre la rejilla del deshidratador." loading="lazy"><figcaption>Secadas despacio</figcaption></figure>
+        </div>
+      </div>
+    </div>
+    <div class="sec gut" style="padding-top:0">
+      <div class="wrap">
+        <div class="teasers">
+          <a class="teaser t1" href="#productos"><p>Para el recreo, antes de entrenar o con el mate.</p><h3>Un snack práctico y rico</h3><span class="go">Ver productos →</span></a>
+          <a class="teaser t2" href="#historia"><p>Productores de fruta en Villa Regina.</p><h3>La familia Stelzer</h3><span class="go">Nuestra historia →</span></a>
+          <a class="teaser t3" href="#experiencias"><p>Mirá en el mapa hasta dónde llegó.</p><h3>De Ushuaia a La Quiaca</h3><span class="go">Ver experiencias →</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRODUCTOS ================= -->
+  <section class="panel sec gut" id="p-productos" role="tabpanel" data-panel="productos" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Productos</p>
+        <h2>Creemos en lo simple.</h2>
+        <p>Manzanas reales de nuestras chacras del Alto Valle, naturalmente deshidratadas para conservar su sabor, fibra y energía natural.</p>
+      </div>
+      <div class="prod-grid">
+        <article class="prod">
+          <div class="ph"><img src="img-chip.jpg" width="1200" height="675" alt="Chips de manzana con cáscara roja sobre la rejilla." loading="lazy"><span class="tag">Manzana</span></div>
+          <div class="body">
+            <h3>Chips crocantes de manzana</h3>
+            <p>Manzanas rojas en rodajas deshidratadas. Libre de gluten, sin TACC y sin azúcar agregada.</p>
+            <div class="spec">
+              <div><span>Ingredientes</span><b>Manzanas</b></div>
+              <div><span>Peso neto</span><b>35 g</b></div>
+              <div><span>Origen</span><b>Villa Regina</b></div>
+            </div>
+          </div>
+        </article>
+        <article class="prod pear">
+          <div class="ph"><img src="img-pera.jpg" width="900" height="1600" alt="Una pera del Valle en la mano, con un cajón de manzanas detrás." loading="lazy" style="object-position:50% 55%"><span class="tag">Pera</span></div>
+          <div class="body">
+            <h3>Chips de pera</h3>
+            <p>Rodajas de pera del Valle, más dulces y suaves. <i class="fill">Datos a confirmar</i></p>
+          </div>
+        </article>
+      </div>
+      <div class="sec-head" style="margin-top:56px">
+        <p class="kicker">Sabores</p>
+        <h2>La misma manzana, con otro carácter.</h2>
+        <p>Además de la clásica, estamos probando versiones saborizadas con especias.</p>
+      </div>
+      <div class="flavors">
+        <article class="flavor f-clasica"><span class="state on">Disponible</span><h3>Clásica</h3><p>Solo manzana. Dulce, apenas ácida y crocante.</p></article>
+        <article class="flavor f-romero"><img src="img-chips-bandeja.jpg" width="900" height="1600" alt="Chips de manzana con romero sobre una bandeja." loading="lazy"><span class="state">Próximamente</span><h3>Con romero</h3><p>Rodajas con hojitas de romero: un toque de monte y un aroma que se nota al abrir la bolsa.</p></article>
+        <article class="flavor f-picante"><span class="state">Próximamente</span><h3>Picante</h3><p>Dulce primero, picor después. Para los que buscan un snack con actitud.</p></article>
+        <article class="flavor f-especias"><span class="state">Próximamente</span><h3>Otras especias</h3><p>Seguimos probando combinaciones. <i class="fill">[definir: canela, jengibre, etc.]</i></p></article>
+      </div>
+      <div class="moments" aria-label="Momentos para comerla">
+        <span>En el recreo</span><span>Antes de entrenar</span><span>Con el mate</span><span>En la mochila</span><span>En la ruta</span><span>Con yogur</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HISTORIA ================= -->
+  <section class="panel sec gut" id="p-historia" role="tabpanel" data-panel="historia" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Nuestra historia</p>
+        <h2>Una familia que vive al ritmo de la cosecha.</h2>
+        <p>Frutas Stelzer es la chacra y la marca de la familia Stelzer, productores de manzana y pera en Villa Regina. <span data-brand>Dolce Mella</span> nace ahí, para que la fruta del Valle llegue a todo el país.</p>
+        <span class="draft-flag">Borrador · completar con los datos reales de la familia</span>
+      </div>
+      <div class="story">
+        <figure class="story-photo">
+          <img src="primera-tanda.jpg" width="900" height="1599" alt="El creador de la marca acomoda rodajas de manzana en una bandeja; detrás, las rejillas del deshidratador cargadas." loading="lazy">
+          <figcaption><i class="fill">[nombre]</i>, creador de <span data-brand>Dolce Mella</span>, armando la primera tanda y probando gustos.</figcaption>
+        </figure>
+        <ol class="timeline">
+          <li><span class="yr"><i class="fill">[año]</i></span><div><h3>La llegada al Valle</h3><p>Cómo y cuándo llegó la familia Stelzer a Villa Regina. <i class="fill">[origen, primera generación, nombres]</i></p></div></li>
+          <li><span class="yr"><i class="fill">[año]</i></span><div><h3>La primera chacra</h3><p>Las primeras hectáreas, las primeras plantas y los álamos que cortan el viento. <i class="fill">[hectáreas, variedades]</i></p></div></li>
+          <li><span class="yr"><i class="fill">[año]</i></span><div><h3>Nace Frutas Stelzer</h3><p>La fruta empieza a salir con el nombre de la familia. <i class="fill">[hitos, mercados]</i></p></div></li>
+          <li><span class="yr"><i class="fill">[año]</i></span><div><h3>La primera tanda</h3><p>Una mesada llena de rodajas, bandejas y muchas pruebas de gusto. De ahí salió la receta.</p></div></li>
+          <li class="now"><span class="yr">Hoy</span><div><h3>Del Valle a todo el país</h3><p>Cada temporada se poda, se ralea, se cosecha y se seca en Villa Regina. <i class="fill">[quiénes trabajan hoy]</i></p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESO ================= -->
+  <section class="panel sec gut" id="p-proceso" role="tabpanel" data-panel="proceso" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">De la chacra a la bolsa</p>
+        <h2>Cómo se hace</h2>
+      </div>
+      <ol class="psteps">
+        <li><img src="img-huerto.jpg" width="900" height="1600" alt="Manzana recién cosechada en la chacra." loading="lazy" style="object-position:50% 68%"><div><h3>Cosecha</h3><p>Manzanas rojas de nuestras chacras del Alto Valle.</p></div></li>
+        <li><img src="img-lavado.jpg" width="900" height="1158" alt="Manzanas lavadas." loading="lazy"><div><h3>Lavado</h3><p>Cada manzana se lava con agua antes de entrar a la sala.</p></div></li>
+        <li><img src="img-seleccion.jpg" width="1200" height="675" alt="Manzanas sobre la cinta de selección." loading="lazy" style="object-position:40% 60%"><div><h3>Selección</h3><p>En la cinta elegimos las piezas sanas.</p></div></li>
+        <li><img src="foto-rodajas.jpg" width="760" height="760" alt="Rodajas de manzana recién cortadas." loading="lazy"><div><h3>Corte en rodajas</h3><p>Rodajas finas y parejas, con cáscara.</p></div></li>
+        <li><img src="img-deshidratado.jpg" width="1200" height="675" alt="Rodajas sobre la rejilla del deshidratador." loading="lazy"><div><h3>Deshidratado</h3><p>Aire tibio y tiempo, hasta que la rodaja queda crocante.</p></div></li>
+        <li><img src="img-bandejas.jpg" width="1200" height="675" alt="Bandejas con chips de manzana listos." loading="lazy"><div><h3>Listas para la bolsa</h3><p>Bolsas de 35 g, cerradas enseguida para que no tomen humedad.</p></div></li>
+      </ol>
+      <p class="proto" style="margin-top:24px"><i class="fill">Ajustar con el método real (temperaturas y tiempos).</i></p>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCIAS ================= -->
+  <section class="panel sec gut" id="p-experiencias" role="tabpanel" data-panel="experiencias" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Experiencias</p>
+        <h2>¿Hasta dónde llegó?</h2>
+        <p>Cada provincia pintada en el mapa es un lugar donde alguien ya la probó. Tocá una provincia para ver qué contaron ahí.</p>
+      </div>
+      <div class="xp-top">
+        <div class="map-card">
+          <svg id="map" viewBox="0 0 400 810" role="img" aria-label="Mapa de Argentina con las provincias donde hay experiencias"></svg>
+          <div class="map-side">
+            <div class="big"><b id="t-prov">0</b><span>provincias</span></div>
+            <div class="big"><b id="t-count">0</b><span>experiencias</span></div>
+            <div class="big"><b id="t-avg">0</b><span>puntaje medio</span></div>
+            <div class="legend">
+              <span><i style="background:var(--green)"></i>Villa Regina, origen</span>
+              <span><i style="background:color-mix(in srgb, var(--red) 28%, var(--paper))"></i>1 experiencia</span>
+              <span><i style="background:color-mix(in srgb, var(--red) 55%, var(--paper))"></i>2 o más</span>
+            </div>
+            <p class="map-hint">Tocá una provincia para filtrar.</p>
+          </div>
+        </div>
+        <form class="share" id="share" novalidate>
+          <h3>Contá tu experiencia</h3>
+          <p class="hint">¿Dónde la comiste y con quién? Tu provincia se pinta en el mapa.</p>
+          <div class="row2">
+            <div class="field"><label for="f-name">Tu nombre</label><input id="f-name" name="name" maxlength="40" autocomplete="given-name" placeholder="Ej.: Carla"></div>
+            <div class="field"><label for="f-city">Ciudad</label><input id="f-city" name="city" maxlength="40" placeholder="Ej.: Bahía Blanca"></div>
+          </div>
+          <div class="field"><label for="f-prov">Provincia</label><select id="f-prov" name="prov"></select></div>
+          <div class="row2">
+            <fieldset class="field"><legend>Producto</legend>
+              <div class="seg">
+                <label><input type="radio" name="prod" value="manzana" id="f-p-m" checked><span>Manzana</span></label>
+                <label><input type="radio" name="prod" value="pera" id="f-p-p"><span>Pera</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="field"><legend>Puntaje</legend>
+              <div class="rate">
+                <input type="radio" name="rate" id="r5" value="5" checked><label for="r5" title="5">★</label>
+                <input type="radio" name="rate" id="r4" value="4"><label for="r4" title="4">★</label>
+                <input type="radio" name="rate" id="r3" value="3"><label for="r3" title="3">★</label>
+                <input type="radio" name="rate" id="r2" value="2"><label for="r2" title="2">★</label>
+                <input type="radio" name="rate" id="r1" value="1"><label for="r1" title="1">★</label>
+              </div>
+            </fieldset>
+          </div>
+          <div class="field"><label for="f-text">Tu experiencia</label><textarea id="f-text" name="text" maxlength="400" placeholder="Ej.: La llevamos de excursión al Lanín y no sobró nada."></textarea></div>
+          <p class="err" id="f-err" hidden></p>
+          <p class="ok" id="f-ok" hidden>¡Listo! Tu experiencia ya está en el muro.</p>
+          <button class="btn red" type="submit">Publicar experiencia</button>
+          <p class="proto">Prototipo: los usuarios terminados en _demo son de ejemplo. Lo que publiques se guarda solo en este navegador.</p>
+        </form>
+      </div>
+      <div class="wall-head">
+        <h3 id="wall-title">Todas las experiencias</h3>
+        <div class="filter-now" id="filter-now" hidden><button type="button" id="clear">Ver todas</button></div>
+      </div>
+      <div class="wall" id="wall"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot gut">
+  <div class="wrap">
+    <div><h2 data-brand>Dolce Mella</h2><p style="margin-top:8px">Un producto de Frutas Stelzer.<br>Hecho con manzanas de Villa Regina, Alto Valle de Río Negro.</p></div>
+    <div><p class="kicker">Dónde estamos</p><ul><li>Villa Regina, Río Negro</li><li><i class="fill">[dirección]</i></li></ul></div>
+    <div><p class="kicker">Contacto</p><ul><li><i class="fill">[WhatsApp]</i></li><li><i class="fill">[Instagram]</i></li><li><i class="fill">[e-mail]</i></li></ul></div>
+  </div>
+  <div class="wrap legal"><span>© Frutas Stelzer · Industria Argentina</span><span>Prototipo v0.2</span></div>
+</footer>
+
+<script>
+/* Nombre de la marca: cambiarlo acá actualiza toda la página. */
+var BRAND = "Dolce Mella";
+(function () {
+  document.title = BRAND;
+  document.querySelectorAll("[data-brand]").forEach(function (el) { el.textContent = BRAND; });
+  var logo = document.querySelector("[data-brand-logo]");
+  var parts = BRAND.split(" ");
+  logo.innerHTML = "";
+  logo.appendChild(document.createTextNode(parts.slice(0, -1).join(" ") + (parts.length > 1 ? " " : "")));
+  var s = document.createElement("span"); s.textContent = parts[parts.length - 1]; logo.appendChild(s);
+})();
+
+var AR = {"w":400,"h":809.8,"paths":{"Entre Ríos":"M301.0,259.8L302.0,274.3L296.6,275.6L296.9,280.4L295.1,283.0L294.3,289.7L296.4,296.8L292.6,298.5L285.1,293.2L281.3,292.4L280.6,290.6L278.2,291.0L275.8,289.0L274.2,289.5L271.0,287.9L257.2,276.1L253.8,269.4L252.1,262.9L254.1,250.6L253.0,247.1L254.3,242.1L258.8,241.1L263.5,235.5L272.0,220.7L273.9,214.5L273.1,208.8L278.3,208.0L281.1,208.9L285.6,205.6L288.1,206.1L293.6,204.3L300.4,206.7L303.5,210.8L305.0,215.2L308.5,219.3L308.4,222.6L306.4,223.5L307.5,226.2L306.6,230.6L303.3,236.3L305.0,238.2L305.0,240.3L303.6,244.4L300.9,246.4L302.0,249.4L301.2,252.7L302.9,255.8L301.0,259.8Z","Salta":"M128.5,49.1L139.5,60.4L142.8,61.3L145.7,56.6L145.2,40.9L147.5,40.9L152.5,44.3L152.4,54.2L157.0,57.5L157.1,59.8L160.4,65.5L166.2,67.7L168.3,66.6L172.9,70.1L174.7,66.6L178.7,70.4L180.9,67.2L184.8,65.3L187.1,61.4L187.0,44.1L183.5,43.7L182.1,46.4L177.9,42.4L173.9,43.4L172.3,38.9L170.7,37.8L171.2,32.2L167.1,30.2L166.4,22.7L164.8,21.5L167.8,9.6L179.3,12.4L184.3,28.3L185.7,20.3L191.7,7.3L195.4,8.5L197.3,7.2L213.3,7.4L213.6,10.4L216.7,13.2L216.7,14.6L222.1,18.7L222.2,65.3L201.9,95.7L191.9,95.5L186.8,93.8L181.2,109.3L175.9,109.0L172.5,110.6L166.6,108.1L165.4,105.8L163.0,106.8L158.8,105.7L157.7,111.2L151.4,110.1L148.4,107.9L144.8,113.3L136.8,99.4L138.2,96.1L141.5,95.9L143.0,94.5L143.4,91.4L141.7,86.4L118.0,86.6L104.8,83.6L107.3,82.8L103.3,75.1L104.8,70.1L105.7,70.8L106.7,67.7L108.1,67.6L109.6,64.9L126.4,56.3L128.5,49.1Z","Jujuy":"M128.6,48.9L133.1,31.4L129.6,27.1L132.8,22.7L132.7,19.9L137.4,17.6L138.4,12.7L146.5,9.1L148.1,2.1L153.7,5.9L156.7,9.8L167.8,9.6L164.8,21.5L166.4,22.7L167.0,30.1L171.1,32.1L170.6,37.6L172.3,38.9L173.8,43.4L177.9,42.4L182.1,46.4L183.5,43.7L186.9,43.8L187.5,60.0L184.8,65.3L180.9,67.2L178.9,70.4L174.7,66.6L172.6,70.0L168.3,66.6L166.2,67.7L160.2,65.3L157.1,59.8L157.0,57.5L152.4,54.2L152.6,44.6L149.1,41.6L145.2,40.9L145.7,56.6L142.8,61.3L139.5,60.4L128.6,48.9Z","Formosa":"M222.1,18.7L228.7,31.4L233.7,37.3L237.8,39.8L238.1,41.3L245.5,46.1L245.4,47.5L247.5,50.9L260.2,56.0L266.0,55.8L276.8,64.1L279.2,67.4L289.3,74.4L295.7,76.2L298.4,79.6L300.5,78.3L309.4,84.1L313.2,90.5L312.9,93.4L309.1,96.7L309.7,97.2L308.2,98.6L308.5,99.9L306.6,103.2L307.2,104.2L301.9,108.3L302.7,109.7L301.5,110.5L300.7,114.1L301.4,119.7L300.3,119.6L300.0,122.3L298.3,123.5L298.7,125.1L296.0,124.1L286.1,113.4L282.8,111.1L279.1,112.2L277.7,108.4L273.1,107.1L272.9,104.3L265.9,96.6L263.3,95.8L262.1,91.7L257.1,84.8L246.2,77.2L243.6,71.7L239.2,70.7L232.8,63.9L222.1,58.5L222.1,18.7Z","Misiones":"M369.8,95.4L369.5,93.7L370.6,93.7L372.4,96.4L373.4,93.8L377.3,93.8L376.9,92.6L378.7,91.7L379.1,94.2L379.4,93.1L381.0,93.7L381.6,95.6L382.9,95.2L384.1,103.0L387.3,109.2L385.3,121.2L386.2,126.7L384.2,131.9L383.2,131.0L381.6,131.8L379.2,135.0L377.6,134.0L375.5,138.5L374.3,137.6L373.9,139.1L372.5,138.0L372.4,139.2L369.7,139.1L367.8,141.4L365.6,140.8L363.8,143.2L363.6,145.9L360.4,146.9L361.3,148.7L355.9,150.2L353.5,154.2L350.0,155.8L346.0,150.3L342.6,137.6L344.5,136.0L347.5,138.8L350.6,136.0L350.5,132.2L353.1,130.5L354.0,127.6L359.3,127.0L359.5,124.8L362.4,123.0L363.4,120.2L365.8,119.5L368.8,108.7L368.3,103.5L369.4,102.6L369.8,99.4L368.7,95.8L369.8,95.4Z","Chaco":"M297.6,125.4L292.3,131.9L293.3,135.8L287.9,139.7L289.2,145.4L288.3,152.3L234.1,152.3L233.3,95.8L201.9,95.7L222.2,65.3L222.1,58.5L232.8,63.9L239.2,70.7L243.6,71.7L246.2,77.2L257.1,84.8L262.1,91.7L263.3,95.8L265.9,96.6L272.9,104.3L273.1,107.1L277.7,108.4L279.1,112.2L282.8,111.1L286.6,113.7L297.6,125.4Z","Corrientes":"M295.0,134.8L305.8,134.7L314.0,138.1L316.9,137.9L320.4,139.9L325.6,138.2L328.2,140.4L332.4,139.1L335.2,142.3L337.5,137.5L340.0,135.6L343.5,136.1L342.5,139.0L345.3,145.4L345.9,150.0L350.0,155.8L347.2,157.9L349.3,160.2L348.7,162.0L345.9,160.7L344.7,161.4L344.7,163.5L342.6,164.3L342.1,167.0L337.4,171.1L334.7,178.1L331.1,180.3L329.7,184.4L323.4,193.0L318.3,196.2L317.6,200.2L314.2,204.1L311.6,205.3L311.4,208.6L306.9,213.9L308.4,218.7L305.0,215.2L303.5,210.8L299.8,206.2L292.8,204.3L288.1,206.1L285.6,205.6L281.1,208.9L278.3,208.0L273.1,208.8L273.0,207.7L274.4,201.8L272.9,196.9L274.5,191.3L274.6,185.6L276.0,181.5L282.0,177.0L284.1,167.4L284.0,156.5L287.7,154.0L288.7,150.3L289.2,145.4L287.9,139.7L295.0,134.8Z","Catamarca":"M108.0,129.2L108.5,125.6L102.9,115.0L103.3,111.3L106.5,107.4L102.7,91.2L104.8,83.6L118.0,86.6L141.8,86.4L143.4,91.4L143.0,94.5L137.2,97.1L137.1,100.5L144.6,113.2L148.1,108.1L151.4,110.1L149.5,116.9L155.2,121.6L154.6,126.7L148.7,135.8L152.7,137.6L155.2,147.0L158.0,147.9L160.6,153.5L164.8,149.0L168.2,150.1L170.1,162.5L168.0,167.9L169.7,169.7L170.8,183.5L173.7,189.9L172.2,191.2L172.5,197.7L168.8,202.2L163.8,204.0L157.5,188.6L156.3,182.5L150.1,175.7L145.5,172.9L146.0,170.1L143.5,167.5L141.3,162.1L133.8,158.7L129.8,160.9L119.9,160.5L117.6,161.5L115.6,155.3L112.5,156.0L105.9,152.3L105.9,146.1L92.7,146.8L98.8,131.0L103.1,132.0L104.4,130.0L108.0,129.2Z","La Rioja":"M87.4,157.2L89.5,152.3L91.6,151.1L92.7,146.8L98.1,147.3L104.8,145.9L106.1,146.5L105.9,152.3L112.5,156.0L115.6,155.3L117.6,161.5L119.9,160.5L129.8,160.9L133.8,158.7L142.5,163.6L143.5,167.5L146.0,170.2L145.5,172.9L150.1,175.7L156.3,182.5L157.5,188.6L163.8,204.0L156.8,227.1L157.0,246.2L151.3,245.9L145.3,247.4L138.5,246.0L136.4,242.9L136.1,240.2L132.4,237.4L131.4,233.4L131.7,222.2L121.2,206.6L107.9,193.1L100.9,191.0L95.0,191.5L96.3,184.0L95.2,180.1L96.9,176.5L91.6,166.6L86.2,162.6L82.8,162.0L85.9,157.1L87.4,157.2Z","San Juan":"M76.7,202.8L77.8,195.9L75.4,183.6L79.9,178.8L80.9,168.6L82.3,166.2L82.8,162.0L86.2,162.6L92.2,167.3L93.3,171.1L97.0,176.8L95.3,179.3L96.3,184.0L94.9,191.4L100.9,191.0L107.9,193.1L121.2,206.6L131.7,222.2L131.4,233.4L132.4,237.4L136.1,240.2L136.4,242.9L138.5,246.0L126.3,245.5L125.8,255.3L123.9,254.1L117.5,254.8L113.2,250.6L106.8,252.6L101.2,257.1L97.4,257.1L96.7,250.8L94.5,250.7L91.9,247.9L89.7,250.3L83.7,251.9L82.6,255.2L70.3,255.9L68.8,250.0L70.8,250.1L71.5,247.6L67.1,244.6L65.0,238.5L65.4,232.2L67.1,227.1L68.4,228.4L69.7,225.8L71.1,225.7L69.7,223.3L72.1,213.1L73.4,211.3L72.9,209.4L75.6,210.2L78.0,208.2L79.3,204.5L76.7,202.8Z","Mendoza":"M76.0,280.4L74.1,277.2L74.1,274.1L76.2,270.2L73.2,266.8L72.7,263.7L73.6,262.7L71.3,256.6L82.6,255.2L83.7,251.9L89.7,250.3L91.7,247.9L94.8,250.8L96.7,250.8L97.4,257.1L101.2,257.1L106.8,252.6L113.9,250.6L117.5,254.8L124.4,254.2L125.8,255.3L127.2,259.4L129.7,267.4L129.0,271.1L130.4,283.5L138.2,298.9L137.9,301.8L136.7,302.9L136.9,306.6L138.3,312.2L142.0,319.7L142.5,333.4L140.6,345.7L108.9,346.2L109.5,383.3L106.1,382.8L104.6,380.6L99.9,378.8L95.5,378.6L92.3,374.2L85.1,374.0L81.8,372.5L79.7,369.8L80.2,366.5L73.1,359.7L71.2,354.7L69.0,353.5L68.2,342.5L69.4,341.2L67.2,330.7L68.0,330.1L65.2,327.8L68.8,325.5L70.9,316.6L70.2,315.3L74.9,307.3L75.1,304.4L79.4,303.0L77.8,291.8L78.9,290.7L78.5,286.6L80.2,282.3L79.3,279.6L77.3,279.0L76.0,280.4Z","Neuquén":"M65.1,349.1L68.0,348.8L69.1,349.8L69.2,354.1L71.3,354.8L73.1,359.7L80.2,366.5L79.7,369.8L81.8,372.5L85.1,374.0L92.3,374.2L95.5,378.6L99.9,378.8L104.6,380.6L106.1,382.8L109.5,383.3L109.5,409.9L114.1,417.6L108.2,417.2L102.8,421.3L96.0,430.0L90.6,432.3L85.4,438.0L82.3,438.1L77.2,441.1L74.4,453.0L71.6,455.6L67.7,456.0L66.0,454.7L57.7,457.8L54.7,461.2L56.6,464.3L54.3,467.8L51.5,468.8L40.6,466.8L40.9,465.0L38.9,459.8L40.9,457.2L42.0,452.4L43.3,452.5L44.3,450.2L41.6,447.8L41.6,444.6L44.1,444.7L45.4,440.2L44.1,438.3L43.5,432.7L47.6,432.7L46.8,431.0L49.3,425.9L49.5,416.0L52.6,413.6L58.2,412.1L60.3,407.6L57.6,404.3L57.0,395.7L53.6,386.9L54.9,381.1L53.2,376.9L55.4,372.3L53.2,369.2L54.6,368.7L53.4,365.9L54.4,362.3L56.0,362.3L56.3,357.4L58.4,357.1L59.2,355.3L62.5,355.7L62.7,352.1L65.1,349.1Z","Chubut":"M39.8,494.9L42.9,493.2L42.5,490.7L169.0,490.7L174.1,495.4L181.3,496.8L179.0,500.9L182.0,501.5L188.5,501.0L189.5,499.7L189.2,497.2L184.0,496.4L194.9,492.6L198.1,497.9L198.5,505.0L196.7,510.1L188.4,512.0L185.7,509.4L186.6,506.0L183.1,503.2L178.8,503.1L172.5,506.5L171.5,509.7L178.2,513.1L184.7,514.4L172.5,520.6L170.8,522.1L170.7,524.4L165.1,530.9L166.2,538.2L167.9,539.9L166.9,541.1L167.3,542.4L165.5,543.9L167.3,547.9L165.1,550.2L166.1,551.5L164.3,551.5L164.4,553.2L162.6,553.0L159.2,555.2L157.6,558.6L157.8,560.1L161.5,561.6L158.3,564.7L155.4,563.3L153.6,564.4L148.6,563.0L147.0,564.6L142.9,565.3L142.4,566.4L143.4,567.3L141.2,566.6L142.4,568.4L134.7,569.4L127.0,578.0L126.4,582.2L124.7,583.1L122.3,587.4L44.8,587.4L45.2,585.8L42.7,583.7L41.9,581.1L42.6,577.0L47.8,575.3L47.5,573.1L49.7,572.2L51.1,569.7L45.9,562.7L36.7,560.8L36.4,558.0L47.7,557.0L51.5,558.3L54.8,551.8L53.1,549.4L40.8,548.1L41.8,546.6L40.8,541.6L44.6,537.2L42.6,534.9L42.8,533.5L41.5,533.2L43.6,531.4L43.5,529.4L39.0,525.6L40.0,522.6L42.8,522.0L43.0,519.5L37.1,517.4L35.3,514.8L35.4,504.2L37.3,502.3L35.5,497.6L37.9,493.7L39.8,494.9Z","Río Negro":"M42.3,490.4L42.0,487.5L39.5,482.3L40.9,480.2L39.9,475.4L40.6,466.8L51.5,468.8L54.3,467.8L56.6,464.3L54.7,461.2L57.7,457.8L66.0,454.7L67.7,456.0L71.6,455.6L74.4,453.0L77.2,441.1L82.3,438.1L85.4,438.0L90.6,432.3L96.0,430.0L102.8,421.3L108.2,417.2L114.1,417.6L109.5,409.9L109.5,383.3L117.1,384.3L119.1,386.0L119.5,389.6L117.2,391.8L116.7,394.2L119.9,396.4L122.1,400.0L130.0,399.4L132.0,403.9L140.0,407.5L141.7,411.0L153.1,411.9L158.3,413.8L160.7,412.8L164.4,414.3L172.0,413.4L181.5,414.6L190.3,418.2L199.7,425.6L202.1,426.0L202.1,459.5L207.6,460.6L213.3,467.5L207.6,470.3L194.7,470.4L189.3,467.5L189.3,466.5L173.1,462.3L176.3,461.6L175.3,459.8L171.8,459.8L173.2,461.0L169.1,462.5L168.1,465.8L169.4,474.5L171.6,479.2L170.4,490.9L42.3,490.4Z","Santa Cruz":"M40.4,616.9L40.5,615.0L38.0,613.0L39.7,611.5L38.7,610.3L39.0,607.0L44.1,604.1L44.2,600.4L42.6,593.3L39.7,591.1L42.5,590.1L44.8,587.4L122.3,587.4L121.5,591.3L125.3,601.1L130.9,604.5L137.4,611.7L148.6,613.7L152.8,613.1L157.2,616.5L157.4,623.9L155.3,629.5L151.8,629.4L145.0,632.4L154.3,630.2L156.9,634.5L153.8,634.3L153.0,636.9L154.0,638.5L150.3,638.7L146.3,642.1L145.9,644.2L140.0,646.1L135.9,650.0L131.2,652.0L129.6,655.5L122.7,660.3L121.3,663.0L121.7,664.2L119.4,666.5L119.8,667.5L117.5,669.1L119.5,669.3L120.7,666.3L121.8,666.3L119.4,678.8L117.5,683.0L112.8,686.2L107.8,686.9L101.8,678.2L100.2,677.5L103.3,682.3L95.0,684.2L103.2,683.3L107.6,687.7L97.6,692.1L93.8,697.6L92.4,702.0L92.6,705.9L87.4,710.3L92.0,707.7L96.0,721.8L93.0,722.9L88.1,721.7L83.5,723.3L89.4,722.6L92.2,723.6L91.4,724.8L95.7,723.2L101.2,732.5L107.3,739.8L106.3,741.7L105.6,739.7L77.1,732.6L39.7,732.2L38.8,731.7L38.4,728.7L32.4,724.9L31.8,722.7L29.5,721.6L31.4,719.7L33.2,714.2L30.4,710.8L33.0,707.3L33.1,704.3L31.5,702.0L32.3,699.7L28.5,698.6L25.5,700.2L23.7,699.0L18.1,702.4L15.7,702.2L13.6,692.1L8.9,687.5L9.9,684.3L8.2,682.1L10.2,678.3L15.3,676.4L17.9,673.3L16.8,669.4L17.2,666.3L15.6,665.7L15.8,664.5L18.9,659.7L23.2,658.3L26.3,655.5L27.1,646.6L32.5,643.8L31.6,637.4L27.7,633.7L31.5,626.1L31.2,622.4L34.8,621.4L37.4,618.5L37.5,616.3L40.4,616.9Z","Tierra del Fuego":"M102.1,799.7L102.3,747.9L108.4,754.5L110.0,759.1L108.9,756.9L107.6,757.0L104.4,759.5L103.8,762.3L112.2,764.9L114.6,771.1L119.8,776.0L122.7,776.8L122.4,778.5L137.8,786.8L143.2,792.0L155.3,796.4L168.7,796.4L164.6,803.1L162.6,802.1L158.7,804.2L157.7,802.7L153.0,802.6L152.5,804.3L142.1,806.2L132.7,802.6L115.6,801.6L108.5,799.9L108.0,801.1L103.9,801.3L102.1,799.7ZM183.5,797.8L194.1,798.4L191.1,800.4L190.9,799.1L185.8,801.0L185.7,799.5L184.6,799.5L178.6,802.6L176.0,800.9L177.5,799.4L180.5,799.6L180.1,798.0L183.2,799.7L183.5,797.8ZM272.8,737.6L271.3,739.0L270.6,735.6L272.5,736.4L272.8,737.6ZM248.1,731.3L244.7,728.7L247.9,727.0L248.7,727.9L247.0,729.2L248.5,728.9L250.2,726.6L249.9,730.6L248.1,731.3ZM274.7,724.0L268.8,731.4L261.7,732.1L261.6,734.4L259.6,736.3L256.2,735.1L257.2,736.9L255.4,738.1L253.7,737.1L254.5,737.1L253.6,735.0L251.1,734.9L252.9,736.6L251.5,736.6L246.9,733.5L247.2,732.7L250.3,734.0L250.0,733.1L252.5,732.6L250.6,731.3L256.5,732.4L259.0,730.4L256.9,731.0L255.1,730.6L257.5,730.4L258.2,727.2L259.6,726.8L258.9,727.5L260.2,729.0L261.0,726.4L263.2,726.6L263.2,725.3L260.2,725.4L256.2,727.3L254.8,724.4L265.2,725.0L257.3,721.0L257.0,719.9L259.3,719.9L255.0,718.3L254.4,716.7L263.7,720.0L266.9,719.5L265.1,719.0L266.3,717.3L271.2,718.4L269.9,718.5L270.4,719.0L276.4,717.7L274.6,718.9L276.4,719.3L278.2,718.7L277.3,717.9L278.0,716.4L281.6,718.2L278.6,720.2L278.2,722.7L274.7,724.0ZM264.4,718.0L261.1,717.2L264.5,716.9L261.5,715.4L261.1,714.6L265.7,716.3L264.4,718.0ZM306.7,724.7L309.8,725.0L299.8,726.5L302.0,727.3L298.0,728.2L301.2,727.8L296.8,729.8L290.3,729.8L286.9,727.5L286.3,728.9L289.3,731.2L292.7,731.6L293.2,732.5L291.9,733.3L292.5,735.0L289.7,733.1L287.1,734.9L283.1,732.0L280.6,732.2L280.0,732.9L284.3,734.8L282.8,735.9L285.0,735.7L283.8,736.6L284.8,737.5L281.5,737.4L278.7,735.2L277.0,735.8L277.6,737.7L279.0,738.3L279.3,740.7L272.0,735.0L273.5,735.3L274.9,733.8L273.7,732.6L275.1,732.8L274.4,732.0L275.8,731.5L274.2,730.5L276.4,730.8L276.4,728.7L278.6,728.4L281.8,725.3L284.6,724.8L284.9,728.0L285.9,727.7L285.2,725.0L285.9,723.9L282.5,722.1L283.6,720.4L285.6,721.7L284.9,720.6L285.9,720.5L283.3,719.3L283.8,718.2L288.3,716.9L286.6,714.2L292.8,716.5L297.0,716.1L298.4,718.6L296.6,719.1L295.1,717.8L294.3,718.7L294.8,720.1L296.7,719.8L296.7,721.5L299.0,721.7L300.4,724.0L300.2,722.6L301.5,723.0L300.2,721.8L300.6,720.9L297.9,720.4L299.2,718.4L306.5,717.3L309.2,720.2L309.0,721.4L304.2,720.4L302.0,721.4L308.3,722.9L309.2,723.8L306.7,724.7ZM270.7,714.9L276.2,714.6L277.2,716.1L275.2,716.4L270.7,714.9ZM270.1,741.1L272.6,740.0L271.6,741.1L273.5,741.3L272.5,742.2L270.1,741.1ZM297.1,732.5L296.0,733.3L296.6,734.8L294.3,733.0L297.1,732.5ZM269.9,716.7L273.0,716.5L274.3,717.4L271.9,718.1L269.9,716.7Z","Buenos Aires":"M330.2,366.2L322.7,379.8L314.5,389.9L313.2,396.9L298.5,405.9L270.5,414.3L244.9,418.2L231.6,417.7L227.4,416.3L225.6,413.6L221.3,413.3L221.4,415.8L223.4,417.1L221.8,420.6L223.7,424.3L222.4,424.3L228.1,427.0L227.5,428.1L225.0,425.7L223.2,425.7L227.5,429.1L226.4,438.0L225.4,438.9L222.8,437.8L221.7,447.0L219.2,449.8L220.7,453.5L223.5,455.7L223.5,457.7L222.0,456.8L222.3,458.5L225.1,457.5L222.1,463.4L214.3,467.6L207.3,460.4L202.1,459.5L202.2,311.3L203.1,306.5L234.1,306.4L248.3,289.5L249.3,286.8L257.6,288.2L261.4,280.5L261.1,279.3L273.5,289.4L280.6,290.6L281.3,292.4L285.1,293.2L292.6,298.5L297.2,298.1L297.6,301.9L296.0,303.9L293.9,304.3L296.1,306.2L295.0,307.9L295.7,309.9L294.5,311.0L294.4,314.5L296.3,316.0L298.8,313.2L307.2,317.4L313.9,321.8L319.1,327.5L321.4,332.2L317.1,339.1L316.8,345.1L319.1,349.8L325.0,355.0L328.8,353.3L330.2,366.2ZM230.4,421.4L231.1,424.0L228.1,422.6L226.7,420.3L230.4,421.4ZM225.3,451.4L228.0,453.3L226.5,456.0L224.1,454.7L225.3,451.4ZM226.7,445.5L228.3,446.6L228.2,450.6L226.0,446.7L226.7,445.5Z","CABA":"M295.7,309.9L297.5,311.2L297.8,311.5L298.2,312.0L298.8,313.2L298.6,313.5L298.2,314.0L297.5,314.1L297.0,314.6L296.3,316.0L294.4,314.5L294.1,313.1L294.5,311.0L295.7,309.9Z","Santa Fe":"M288.3,152.3L287.2,154.6L284.0,156.5L284.1,167.4L282.0,177.0L276.0,181.5L274.6,185.6L274.5,191.3L272.9,196.9L274.4,201.8L273.0,207.7L274.0,211.8L273.1,218.4L263.5,235.5L258.8,241.1L254.3,242.1L253.0,247.1L254.1,250.6L252.1,262.9L256.2,274.6L261.4,279.9L257.8,287.9L255.9,288.6L253.9,287.1L249.3,286.8L248.3,289.5L234.1,306.4L212.3,306.5L230.1,275.9L233.1,273.1L233.6,268.6L230.6,264.9L231.1,263.1L230.2,260.2L224.4,252.3L225.1,248.1L224.0,242.5L226.3,239.5L231.3,218.3L226.0,210.7L234.1,152.3L288.3,152.3Z","Tucumán":"M159.0,105.8L163.0,106.8L165.4,105.8L166.6,108.1L172.5,110.6L175.9,109.0L181.2,109.3L181.3,111.0L180.9,120.3L179.4,120.3L177.6,123.4L173.7,135.6L170.2,139.5L172.0,140.5L170.1,142.6L171.4,146.9L169.7,149.8L167.1,150.4L164.8,149.0L160.8,153.6L158.0,147.9L155.2,147.0L152.7,137.6L148.7,135.8L154.6,126.7L155.2,122.1L149.5,116.9L150.5,111.7L151.4,110.1L157.9,111.1L159.0,105.8Z","Santiago del Estero":"M233.3,95.8L234.1,152.3L226.9,204.4L223.1,195.2L202.2,195.1L200.7,192.3L194.1,192.2L190.0,189.6L189.5,187.9L185.6,186.7L173.7,189.9L170.8,183.5L169.7,169.7L168.0,167.9L170.1,162.5L168.2,150.1L170.0,149.6L171.4,146.9L170.1,142.6L172.0,140.5L170.2,139.5L173.7,135.6L177.6,123.4L179.4,120.3L180.9,120.3L181.3,108.4L186.4,94.4L191.9,95.5L233.3,95.8Z","San Luis":"M168.9,278.1L169.6,345.7L140.5,345.6L142.8,324.5L141.5,317.9L138.3,312.2L136.9,306.6L136.7,302.9L137.9,301.8L138.2,298.9L130.4,283.5L129.0,271.1L129.7,267.4L125.9,256.3L126.3,245.5L145.3,247.4L151.3,245.9L158.6,246.2L165.5,250.4L167.8,256.9L172.9,256.2L173.7,263.9L170.8,275.8L168.9,278.1Z","La Pampa":"M169.7,345.7L169.8,321.5L202.2,321.5L202.1,426.0L199.7,425.6L190.3,418.2L181.5,414.6L172.0,413.4L164.4,414.3L160.7,412.8L158.3,413.8L153.1,411.9L141.7,411.0L140.0,407.5L132.0,403.9L130.0,399.4L122.1,400.0L119.9,396.4L116.7,394.2L117.2,391.8L119.5,389.6L119.1,386.0L117.1,384.3L109.5,383.3L109.2,345.8L169.7,345.7Z","Córdoba":"M226.0,210.7L231.3,218.3L226.3,239.5L224.1,242.2L225.1,248.1L224.4,252.3L230.2,260.1L231.1,263.1L230.6,264.9L233.5,268.2L232.8,273.9L230.1,275.9L212.3,306.5L202.4,307.3L202.2,321.5L169.8,321.5L168.9,278.1L170.8,275.8L173.7,263.9L173.0,256.4L167.8,256.9L165.5,250.4L159.2,246.4L157.0,246.2L156.8,227.1L163.8,204.0L168.8,202.2L172.5,197.7L172.4,190.4L185.6,186.7L189.5,187.9L190.0,189.6L194.1,192.2L200.7,192.3L202.2,195.1L223.1,195.2L226.9,204.4L226.0,210.7Z"},"c":{"Entre Ríos":[277.8,251.3],"Salta":[204.8,60.1],"Jujuy":[151.4,36.1],"Formosa":[265.6,72.4],"Misiones":[373.2,124.2],"Chaco":[253.5,105.0],"Corrientes":[308.5,176.6],"Catamarca":[123.6,143.8],"La Rioja":[135.9,196.6],"San Juan":[99.7,209.6],"Mendoza":[105.3,315.5],"Neuquén":[84.6,408.8],"Chubut":[105.2,539.0],"Río Negro":[144.3,437.1],"Santa Cruz":[68.4,664.6],"Tierra del Fuego":[112.5,776.9],"Buenos Aires":[255.9,362.2],"CABA":[296.4,312.9],"Santa Fe":[248.1,228.8],"Tucumán":[164.0,129.7],"Santiago del Estero":[202.3,148.4],"San Luis":[153.2,295.8],"La Pampa":[155.8,371.5],"Córdoba":[196.5,254.1]},"vr":[131.8,420.6]};
+
+(function () {
+  /* ---------- Solapas ---------- */
+  var TABS = ["inicio", "productos", "historia", "proceso", "experiencias"];
+  function show(name, scroll) {
+    if (TABS.indexOf(name) < 0) name = "inicio";
+    document.querySelectorAll("[data-panel]").forEach(function (p) { p.hidden = p.getAttribute("data-panel") !== name; });
+    document.querySelectorAll("[data-tab]").forEach(function (t) {
+      var on = t.getAttribute("data-tab") === name;
+      t.setAttribute("aria-selected", on);
+      if (on && t.scrollIntoView) { try { t.scrollIntoView({ block: "nearest", inline: "center" }); } catch (e) {} }
+    });
+    if (scroll) window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  }
+  window.addEventListener("hashchange", function () { show(location.hash.slice(1), true); });
+  show(location.hash.slice(1), false);
+
+  /* ---------- Datos ---------- */
+  var PROVS = ["Buenos Aires","CABA","Catamarca","Chaco","Chubut","Córdoba","Corrientes","Entre Ríos","Formosa","Jujuy","La Pampa","La Rioja","Mendoza","Misiones","Neuquén","Río Negro","Salta","San Juan","San Luis","Santa Cruz","Santa Fe","Santiago del Estero","Tierra del Fuego","Tucumán"];
+  var DEMO = [
+    { n: "Lucía_demo", c: "Ushuaia", p: "Tierra del Fuego", pr: "manzana", r: 5, t: "La llevamos al Glaciar Martial. Con el frío, unas rodajas de manzana y el termo de té fueron lo mejor del día." },
+    { n: "Martín_demo", c: "Río Gallegos", p: "Santa Cruz", pr: "pera", r: 5, t: "La de pera es un caramelo. Mis hijos la piden en vez de galletitas para el recreo." },
+    { n: "Ailén_demo", c: "Puerto Madryn", p: "Chubut", pr: "manzana", r: 4, t: "Ideal para salir en kayak: no se rompe, no pesa y no ensucia. La próxima compro dos bolsas." },
+    { n: "Ezequiel_demo", c: "Villa Regina", p: "Río Negro", pr: "manzana", r: 5, t: "Soy de acá y se siente el gusto de la manzana del Valle. Es la fruta de las chacras de siempre." },
+    { n: "Pilar_demo", c: "Bariloche", p: "Río Negro", pr: "manzana", r: 5, t: "Subimos al Cerro Otto con dos bolsas. Crocantes hasta arriba." },
+    { n: "Rocío_demo", c: "San Martín de los Andes", p: "Neuquén", pr: "pera", r: 5, t: "La comimos en la cumbre del Chapelco. Dulce, liviana y con gusto a pera de verdad." },
+    { n: "Ignacio_demo", c: "Santa Rosa", p: "La Pampa", pr: "manzana", r: 4, t: "La pongo en la avena de la mañana y queda bárbara. Me gustaría una bolsa más grande." },
+    { n: "Valentina_demo", c: "Mar del Plata", p: "Buenos Aires", pr: "pera", r: 5, t: "En la playa con el mate. Mi abuela dice que le recuerda a las peras que secaba ella." },
+    { n: "Bautista_demo", c: "La Plata", p: "Buenos Aires", pr: "manzana", r: 5, t: "La llevo al gimnasio. Antes de entrenar es justo lo que necesito." },
+    { n: "Tomás_demo", c: "Palermo", p: "CABA", pr: "manzana", r: 4, t: "La tengo en el cajón de la oficina. Crocante de verdad, y sin azúcar agregada se nota." },
+    { n: "Florencia_demo", c: "Rosario", p: "Santa Fe", pr: "manzana", r: 5, t: "Le gustó hasta a mi hijo que no come fruta. Ahora la pide por nombre." },
+    { n: "Joaquín_demo", c: "Villa Carlos Paz", p: "Córdoba", pr: "pera", r: 5, t: "Picada con queso de cabra y rodajas de pera: probalo, no vas a volver atrás." },
+    { n: "Camila_demo", c: "Paraná", p: "Entre Ríos", pr: "manzana", r: 4, t: "La uso para decorar tortas y budines. Queda hermosa y no se ablanda." },
+    { n: "Santiago_demo", c: "Godoy Cruz", p: "Mendoza", pr: "pera", r: 5, t: "Llevamos tres bolsas al Aconcagua para el trekking. Volvimos sin ninguna." },
+    { n: "Milagros_demo", c: "San Juan", p: "San Juan", pr: "manzana", r: 4, t: "Con el calor de acá se agradece algo liviano. Muy rica, con el punto justo de acidez." },
+    { n: "Facundo_demo", c: "Merlo", p: "San Luis", pr: "manzana", r: 5, t: "Me la regalaron de Río Negro y ya la encargué para toda la familia." },
+    { n: "Agustina_demo", c: "Chilecito", p: "La Rioja", pr: "pera", r: 4, t: "Suave y dulce. Mezclada con nueces de acá es un snack perfecto." },
+    { n: "Nicolás_demo", c: "Catamarca", p: "Catamarca", pr: "manzana", r: 5, t: "Buenísima para la ruta. Hicimos la 40 y fue la compañera de todo el viaje." },
+    { n: "Sofía_demo", c: "Yerba Buena", p: "Tucumán", pr: "pera", r: 5, t: "La pera deshidratada con yogur natural es mi desayuno favorito." },
+    { n: "Lautaro_demo", c: "Salta", p: "Salta", pr: "manzana", r: 4, t: "Muy buena calidad. Se nota que las rodajas son parejas y bien secas." },
+    { n: "Micaela_demo", c: "Tilcara", p: "Jujuy", pr: "manzana", r: 5, t: "Subimos a la Garganta del Diablo con una bolsa. A 2.500 metros cae muy bien algo dulce." },
+    { n: "Gonzalo_demo", c: "La Banda", p: "Santiago del Estero", pr: "pera", r: 4, t: "Primera vez que pruebo pera seca y me sorprendió. Muy natural." },
+    { n: "Julieta_demo", c: "Resistencia", p: "Chaco", pr: "manzana", r: 5, t: "Para los chicos del jardín es la merienda estrella. Sin sellos, que es lo que buscamos." },
+    { n: "Matías_demo", c: "Formosa", p: "Formosa", pr: "manzana", r: 4, t: "Llegó perfecta después de tantos kilómetros. Crocante como recién hecha." },
+    { n: "Antonella_demo", c: "Goya", p: "Corrientes", pr: "pera", r: 5, t: "Con el tereré queda genial. Nadie en casa conocía la pera así." },
+    { n: "Bruno_demo", c: "Oberá", p: "Misiones", pr: "manzana", r: 5, t: "En Oberá somos de la yerba, pero esta manzana del sur se ganó un lugar en la mesa." },
+    { n: "Delfina_demo", c: "Córdoba", p: "Córdoba", pr: "manzana", r: 5, t: "La llevo a la facu todos los días. Mis compañeros ya me la piden." }
+  ];
+  var KEY = "dolcemella.reviews.v1";
+  var COLORS = ["#E0262F", "#0F5132", "#6B5CA5", "#F08A3C", "#2F7A3B", "#B01822"];
+  function load() { try { var v = JSON.parse(localStorage.getItem(KEY) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+  function save(list) { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {} }
+  var mine = load(), filter = null, lastNew = null;
+  function all() { return mine.concat(DEMO); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]; }); }
+  function hash(s) { var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); }
+  function counts() { var c = {}; all().forEach(function (x) { c[x.p] = (c[x.p] || 0) + 1; }); return c; }
+
+  /* ---------- Mapa ---------- */
+  var NS = "http://www.w3.org/2000/svg";
+  var svg = document.getElementById("map");
+  svg.setAttribute("viewBox", "0 0 " + AR.w + " " + AR.h);
+  var gProv = document.createElementNS(NS, "g"), gPins = document.createElementNS(NS, "g");
+  svg.appendChild(gProv); svg.appendChild(gPins);
+  var provEls = {};
+  Object.keys(AR.paths).forEach(function (name) {
+    var p = document.createElementNS(NS, "path");
+    p.setAttribute("d", AR.paths[name]);
+    p.setAttribute("class", "prov");
+    p.setAttribute("tabindex", "0");
+    p.setAttribute("role", "button");
+    var t = document.createElementNS(NS, "title"); t.textContent = name; p.appendChild(t);
+    p.addEventListener("click", function () { setFilter(filter === name ? null : name); });
+    p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFilter(filter === name ? null : name); } });
+    gProv.appendChild(p); provEls[name] = p;
+  });
+  // CABA es muy chica: marcador propio
+  var caba = AR.c["CABA"];
+
+  function drawMap() {
+    var c = counts();
+    Object.keys(provEls).forEach(function (name) {
+      var n = c[name] || 0, el = provEls[name];
+      el.setAttribute("class", "prov" + (n >= 2 ? " has2" : n === 1 ? " has" : "") + (filter === name ? " sel" : ""));
+      el.querySelector("title").textContent = name + ": " + n + (n === 1 ? " experiencia" : " experiencias");
+    });
+    gPins.innerHTML = "";
+    Object.keys(c).forEach(function (name) {
+      var xy = AR.c[name]; if (!xy) return;
+      var r = Math.min(4 + c[name] * 1.6, 10);
+      var pulse = document.createElementNS(NS, "circle");
+      pulse.setAttribute("cx", xy[0]); pulse.setAttribute("cy", xy[1]); pulse.setAttribute("r", r);
+      pulse.setAttribute("class", "pin-pulse"); pulse.style.animationDelay = (hash(name) % 2400) + "ms";
+      var dot = document.createElementNS(NS, "circle");
+      dot.setAttribute("cx", xy[0]); dot.setAttribute("cy", xy[1]); dot.setAttribute("r", r * .6);
+      dot.setAttribute("class", "pin");
+      gPins.appendChild(pulse); gPins.appendChild(dot);
+    });
+    // origen: Villa Regina (39.1°S 67.08°O)
+    var vr = AR.vr;
+    var o = document.createElementNS(NS, "circle");
+    o.setAttribute("cx", vr[0]); o.setAttribute("cy", vr[1]); o.setAttribute("r", 7); o.setAttribute("class", "origin");
+    var ot = document.createElementNS(NS, "title"); ot.textContent = "Villa Regina, Río Negro: origen"; o.appendChild(ot);
+    gPins.appendChild(o);
+  }
+
+  function renderTally() {
+    var list = all(), c = counts(), sum = 0;
+    list.forEach(function (x) { sum += x.r; });
+    document.getElementById("t-count").textContent = list.length;
+    document.getElementById("t-prov").textContent = Object.keys(c).length;
+    document.getElementById("f-prov").textContent = Object.keys(c).length;
+    document.getElementById("t-avg").textContent = (sum / list.length).toFixed(1).replace(".", ",");
+  }
+
+  function renderWall() {
+    var list = all().filter(function (x) { return !filter || x.p === filter; });
+    document.getElementById("wall-title").textContent = filter ? "Experiencias en " + filter : "Todas las experiencias";
+    document.getElementById("filter-now").hidden = !filter;
+    var wall = document.getElementById("wall");
+    if (!list.length) { wall.innerHTML = '<p class="empty">Todavía no hay experiencias en ' + esc(filter) + '. ¡Sé la primera persona en contar la tuya!</p>'; return; }
+    wall.innerHTML = list.map(function (x) {
+      var col = COLORS[hash(x.n) % COLORS.length];
+      return '<article class="note' + (x === lastNew ? " new" : "") + '">' +
+        '<div class="meta"><span class="p ' + (x.pr === "pera" ? "pera" : "manzana") + '">' + (x.pr === "pera" ? "Pera" : "Manzana") + '</span><span class="stars" aria-label="' + x.r + ' de 5">' + "★★★★★".slice(0, x.r) + "☆☆☆☆☆".slice(0, 5 - x.r) + '</span></div>' +
+        '<blockquote>' + esc(x.t) + '</blockquote>' +
+        '<div class="who"><span class="av" style="background:' + col + '">' + esc(x.n.charAt(0).toUpperCase()) + '</span><div><b>' + esc(x.n) + '</b><span>' + esc(x.c) + ', ' + esc(x.p) + '</span></div></div>' +
+        '</article>';
+    }).join("");
+  }
+
+  function setFilter(name) { filter = name; drawMap(); renderWall(); }
+  function renderAll() { renderTally(); drawMap(); renderWall(); }
+  document.getElementById("clear").addEventListener("click", function () { setFilter(null); });
+
+  var sel = document.getElementById("f-prov");
+  sel.innerHTML = '<option value="">Elegí tu provincia</option>' + PROVS.map(function (p) { return "<option>" + p + "</option>"; }).join("");
+
+  document.getElementById("share").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = e.target, err = document.getElementById("f-err"), ok = document.getElementById("f-ok");
+    var name = f.name.value.trim(), city = f.city.value.trim(), prov = f.prov.value, text = f.text.value.trim();
+    var missing = [];
+    if (!name) missing.push("tu nombre");
+    if (!prov) missing.push("la provincia");
+    if (text.length < 10) missing.push("tu experiencia (al menos 10 letras)");
+    ok.hidden = true;
+    if (missing.length) { err.textContent = "Falta completar " + missing.join(", ") + "."; err.hidden = false; return; }
+    err.hidden = true;
+    var item = { n: name, c: city || prov, p: prov, pr: f.prod.value, r: +f.rate.value, t: text };
+    mine.unshift(item); save(mine); lastNew = item; filter = null;
+    renderAll(); ok.hidden = false; f.text.value = "";
+  });
+
+  renderAll();
+})();
+</script>
+</body>
+</html>
