@@ -347,7 +347,7 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
         <div><b>35 g</b><span>por bolsa</span></div>
         <div><b>1</b><span>ingrediente: manzanas</span></div>
         <div><b>0</b><span>azúcar agregada</span></div>
-        <div><b id="f-prov">24</b><span>provincias ya la probaron</span></div>
+        <div><b id="f-prov">23</b><span id="f-prov-l">provincias y CABA ya la probaron</span></div>
       </div>
     </div>
     <div class="sec gut">
@@ -477,7 +477,7 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
         <div class="map-card">
           <svg id="map" viewBox="0 0 400 810" role="img" aria-label="Mapa de Argentina con las provincias donde hay experiencias"></svg>
           <div class="map-side">
-            <div class="big"><b id="t-prov">0</b><span>provincias</span></div>
+            <div class="big"><b id="t-prov">0</b><span id="t-prov-l">provincias</span></div>
             <div class="big"><b id="t-count">0</b><span>experiencias</span></div>
             <div class="big"><b id="t-avg">0</b><span>puntaje medio</span></div>
             <div class="legend">
@@ -662,8 +662,12 @@ var AR = {"w":400,"h":809.8,"paths":{"Entre Ríos":"M301.0,259.8L302.0,274.3L296
     var list = all(), c = counts(), sum = 0;
     list.forEach(function (x) { sum += x.r; });
     document.getElementById("t-count").textContent = list.length;
-    document.getElementById("t-prov").textContent = Object.keys(c).length;
-    document.getElementById("f-prov").textContent = Object.keys(c).length;
+    var nProv = Object.keys(c).filter(function (k) { return k !== "CABA"; }).length;
+    var withCaba = !!c["CABA"];
+    document.getElementById("t-prov").textContent = nProv;
+    document.getElementById("t-prov-l").textContent = withCaba ? "provincias + CABA" : "provincias";
+    document.getElementById("f-prov").textContent = nProv;
+    document.getElementById("f-prov-l").textContent = withCaba ? "provincias y CABA ya la probaron" : "provincias ya la probaron";
     document.getElementById("t-avg").textContent = (sum / list.length).toFixed(1).replace(".", ",");
   }
 
